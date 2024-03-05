@@ -23,7 +23,7 @@ namespace CircusTreinEindproject
         
         private void buttonS_H_Click(object sender, EventArgs e)
         {
-            wagon.AnimalToList(new Animal(Enums.AnimalSizes.Small, Enums.Diet.Herbivore));
+            wagon.PutAnimalInList(new Animal(Enums.AnimalSizes.Small, Enums.Diet.Herbivore));
             UpdateList();
         }
 
@@ -31,43 +31,51 @@ namespace CircusTreinEindproject
 
         private void buttonM_H_Click(object sender, EventArgs e)
         {
-            wagon.AnimalToList(new Animal(Enums.AnimalSizes.Medium, Enums.Diet.Herbivore));
+            wagon.PutAnimalInList(new Animal(Enums.AnimalSizes.Medium, Enums.Diet.Herbivore));
             UpdateList();
         }
 
         private void buttonL_H_Click(object sender, EventArgs e)
         {
-            wagon.AnimalToList(new Animal(Enums.AnimalSizes.Large, Enums.Diet.Herbivore));
+            wagon.PutAnimalInList(new Animal(Enums.AnimalSizes.Large, Enums.Diet.Herbivore));
             UpdateList();
         }
 
         private void buttonS_C_Click(object sender, EventArgs e)
         {
-            wagon.AnimalToList(new Animal(Enums.AnimalSizes.Small, Enums.Diet.Carnivore));
+            wagon.PutAnimalInList(new Animal(Enums.AnimalSizes.Small, Enums.Diet.Carnivore));
             UpdateList();
         }
 
         private void buttonM_C_Click(object sender, EventArgs e)
         {
-            wagon.AnimalToList(new Animal(Enums.AnimalSizes.Medium, Enums.Diet.Carnivore));
+            wagon.PutAnimalInList(new Animal(Enums.AnimalSizes.Medium, Enums.Diet.Carnivore));
             UpdateList();
         }
 
         private void buttonL_C_Click(object sender, EventArgs e)
         {
-            wagon.AnimalToList(new Animal(Enums.AnimalSizes.Large, Enums.Diet.Carnivore));
+            wagon.PutAnimalInList(new Animal(Enums.AnimalSizes.Large, Enums.Diet.Carnivore));
             UpdateList();
         }
 
         private void Distribute_Click(object sender, EventArgs e)
         {
-            wagon.SortAnimals();
-            AnimalsDistribute();
+            if(wagon.GetAnimalsSumBySize() == 20)
+            {
+                wagon.SortAnimalsToSizeAscending();
+                AnimalsDistributeAndAddToTrain();
+            }
+            else
+            {
+                wagon.SortAnimalsToSizeDescending();
+                AnimalsDistributeAndAddToTrain();
+            }
         }
 
-        public void AnimalsDistribute()
+        public void AnimalsDistributeAndAddToTrain()
         {
-            List<Animal> animalList = wagon.GetAnimals();
+            List<Animal> animalList = wagon.GetAnimals(); 
             foreach (Animal animal in animalList)
             {
                 train.DistributeAnimals(animal);
@@ -83,7 +91,10 @@ namespace CircusTreinEindproject
             }
 
             labelWagonCount.Text = "Wagons: " + train.GetWagons().Count.ToString();
+            
         }
+
+
 
 
         private void UpdateList()
