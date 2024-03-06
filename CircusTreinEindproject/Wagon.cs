@@ -38,7 +38,7 @@ namespace CircusTreinEindproject
 
         public bool TryAddingAnimal(Animal animal)
         {
-            if (DoesAnimalBehave(animal) && DoesAnimalFit(animal))
+            if (DoesAnimalEat(animal) && DoesAnimalFit(animal))
             {
                 PutAnimalInList(animal);
                 return true;
@@ -62,7 +62,7 @@ namespace CircusTreinEindproject
             return animals.Sum(a => (int)a.size);
         }
 
-        private bool DoesAnimalBehave(Animal animal)
+        private bool DoesAnimalEat(Animal animal)
         {
             foreach (var existingAnimal in animals)
             {
