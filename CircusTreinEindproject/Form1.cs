@@ -17,13 +17,15 @@ namespace CircusTreinEindproject
             InitializeComponent();
         }
 
-        Train train = new Train();
-        Wagon wagon = new Wagon(); 
+        Train train;
+        SortingLogic sortLogic = new SortingLogic();
 
-        
+        List<Animal> animals = new List<Animal>();
+
+
         private void buttonS_H_Click(object sender, EventArgs e)
         {
-            wagon.PutAnimalInList(new Animal(Enums.AnimalSizes.Small, Enums.Diet.Herbivore));
+            animals.Add(new Animal(Enums.AnimalSizes.Small, Enums.Diet.Herbivore));
             UpdateList();
         }
 
@@ -31,77 +33,59 @@ namespace CircusTreinEindproject
 
         private void buttonM_H_Click(object sender, EventArgs e)
         {
-            wagon.PutAnimalInList(new Animal(Enums.AnimalSizes.Medium, Enums.Diet.Herbivore));
+            animals.Add(new Animal(Enums.AnimalSizes.Medium, Enums.Diet.Herbivore));
             UpdateList();
         }
 
         private void buttonL_H_Click(object sender, EventArgs e)
         {
-            wagon.PutAnimalInList(new Animal(Enums.AnimalSizes.Large, Enums.Diet.Herbivore));
+            animals.Add(new Animal(Enums.AnimalSizes.Large, Enums.Diet.Herbivore));
             UpdateList();
         }
 
         private void buttonS_C_Click(object sender, EventArgs e)
         {
-            wagon.PutAnimalInList(new Animal(Enums.AnimalSizes.Small, Enums.Diet.Carnivore));
+            animals.Add(new Animal(Enums.AnimalSizes.Small, Enums.Diet.Carnivore));
             UpdateList();
         }
 
         private void buttonM_C_Click(object sender, EventArgs e)
         {
-            wagon.PutAnimalInList(new Animal(Enums.AnimalSizes.Medium, Enums.Diet.Carnivore));
+            animals.Add(new Animal(Enums.AnimalSizes.Medium, Enums.Diet.Carnivore));
             UpdateList();
         }
 
         private void buttonL_C_Click(object sender, EventArgs e)
         {
-            wagon.PutAnimalInList(new Animal(Enums.AnimalSizes.Large, Enums.Diet.Carnivore));
+            animals.Add(new Animal(Enums.AnimalSizes.Large, Enums.Diet.Carnivore));
             UpdateList();
         }
 
         private void Distribute_Click(object sender, EventArgs e)
         {
-            if(wagon.GetAnimalsSumBySize() == 20)
-            {
-                wagon.SortAnimalsToSizeAscending();
-                AnimalsDistributeAndAddToTrain();
-            }
-            else
-            {
-                wagon.SortAnimalsToSizeDescending();
-                AnimalsDistributeAndAddToTrain();
-            }
+            train = sortLogic.FirstSortThanDistributeAnimals(animals);
+            ShowAnimalsAndWagonsInListBox();
         }
 
-        public void AnimalsDistributeAndAddToTrain()
+        private void ShowAnimalsAndWagonsInListBox()
         {
-            List<Animal> animalList = wagon.GetAnimals(); 
-            foreach (Animal animal in animalList)
-            {
-                train.DistributeAnimals(animal);
-            }
-
-
             List<Wagon> wagonList = train.GetWagons();
             listBoxWagons.Items.Clear();
             foreach (Wagon wagon in wagonList)
             {
                 listBoxWagons.Items.Add(wagon);
-                
+
             }
 
             labelWagonCount.Text = "Wagons: " + train.GetWagons().Count.ToString();
-            
+
         }
-
-
 
 
         private void UpdateList()
         {
-            List<Animal> list = wagon.GetAnimals();
             listBoxAnimals.Items.Clear();
-            foreach (Animal animal in list)
+            foreach (Animal animal in animals)
             {
                 listBoxAnimals.Items.Add(animal);
             }

@@ -12,12 +12,12 @@ namespace CircusTreinEindproject
         Wagon wagon = new Wagon();
 
         private List<Wagon> wagons;
-        private List<Animal> animals;
-        
-        public Train() 
+        //private List<Animal> animals;
+
+        public Train()
         {
             wagons = new List<Wagon>();
-            animals = new List<Animal>();
+            //animals = new List<Animal>();
         }
 
 
@@ -31,7 +31,7 @@ namespace CircusTreinEindproject
         {
             if (wagons.Count == 0)
             {
-                
+
                 wagons.Add(new Wagon());
             }
         }
@@ -42,11 +42,11 @@ namespace CircusTreinEindproject
             {
                 if (wagons[i].TryAddingAnimal(animal))
                 {
-                    return; 
+                    return;
                 }
             }
 
-            
+
             wagons.Add(new Wagon());
             wagons[wagons.Count - 1].TryAddingAnimal(animal);
         }
