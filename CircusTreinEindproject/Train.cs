@@ -7,17 +7,16 @@ using System.Windows.Forms;
 
 namespace CircusTreinEindproject
 {
-    internal class Train
+    public class Train
     {
         Wagon wagon = new Wagon();
 
         private List<Wagon> wagons;
-        //private List<Animal> animals;
+        
 
         public Train()
         {
             wagons = new List<Wagon>();
-            //animals = new List<Animal>();
         }
 
 

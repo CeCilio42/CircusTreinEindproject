@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CircusTreinEindproject
 {
-    internal class SortingLogic
+    public class SortingLogic
     {
        public Train FirstSortThanDistributeAnimals(List<Animal> animalsToAdd)
         {

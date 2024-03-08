@@ -8,8 +8,9 @@ using System.Windows.Forms;
 
 namespace CircusTreinEindproject
 {
-    internal class Wagon
+    public class Wagon
     {
+        
         private int MaximumCap = 10;
         private List<Animal> animals;
 
@@ -23,39 +24,21 @@ namespace CircusTreinEindproject
 
         public bool TryAddingAnimal(Animal animal)
         {
-            if (DoesAnimalEat(animal) && DoesAnimalFit(animal))
+            if (animal.DoIEat(animals, animal) && DoesAnimalFit(animal))
             {
-                PutAnimalInList(animal);
+                animals.Add(animal);
                 return true;
             }
 
             return false;
         }
 
-        private void PutAnimalInList(Animal animal)
-        {
-            animals.Add(animal);
-        }
 
         private bool DoesAnimalFit(Animal animal)
         {
             return animals.Sum(a => (int)a.size) + (int)animal.size <= MaximumCap;
         }
 
-        private bool DoesAnimalEat(Animal animal)
-        {
-            foreach (var existingAnimal in animals)
-            {
-                bool isCarnivore = existingAnimal.diet == Diet.Carnivore;
-                bool sizeCondition = isCarnivore ? (int)existingAnimal.size >= (int)animal.size : existingAnimal.size >= animal.size;
-
-                if (isCarnivore && sizeCondition || animal.diet == Diet.Carnivore && !sizeCondition)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
+        
     }
 }

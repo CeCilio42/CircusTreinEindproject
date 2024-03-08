@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CircusTreinEindproject
 {
-    internal class Animal
+    public class Animal
     {
 
         public AnimalSizes size { get; set; }
@@ -25,5 +25,21 @@ namespace CircusTreinEindproject
             return size.ToString() + " " + diet.ToString();
         }
 
+
+        public bool DoIEat(List<Animal> animals, Animal animal)
+        {
+            foreach (var existingAnimal in animals)
+            {
+                bool isCarnivore = existingAnimal.diet == Diet.Carnivore;
+                bool sizeCondition = isCarnivore ? (int)existingAnimal.size >= (int)animal.size : existingAnimal.size >= animal.size;
+
+                if (isCarnivore && sizeCondition || animal.diet == Diet.Carnivore && !sizeCondition)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
