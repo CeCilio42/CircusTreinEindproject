@@ -27,13 +27,15 @@ namespace CircusTreinEindproject
 
 
         public bool DoIEat(List<Animal> animals, Animal animal)
-        {
+        { 
             foreach (var existingAnimal in animals)
             {
                 bool isCarnivore = existingAnimal.diet == Diet.Carnivore;
-                bool sizeCondition = isCarnivore ? (int)existingAnimal.size >= (int)animal.size : existingAnimal.size >= animal.size;
+                bool sizeCondition = isCarnivore ? (int)existingAnimal.size >= 
+                    (int)animal.size : existingAnimal.size >= animal.size;
 
-                if (isCarnivore && sizeCondition || animal.diet == Diet.Carnivore && !sizeCondition)
+                if (isCarnivore && sizeCondition || animal.diet == Diet.Carnivore && 
+                    !sizeCondition)
                 {
                     return false;
                 }

@@ -91,6 +91,11 @@ namespace CircusTreinEindproject
             }
         }
 
-       
+        private void Clear_Click(object sender, EventArgs e)
+        {
+            animals.Clear();
+            listBoxWagons.Items.Clear();
+            listBoxAnimals.Items.Clear();
+        }
     }
 }
